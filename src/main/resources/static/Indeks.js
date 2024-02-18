@@ -1,65 +1,77 @@
-let biletterArray = [];
+// Oppretter Array for å lagre infoen fra brukeren og Regex for input validering
+let kinoBilettArray = [];
+let telefonNrRegex = /^(\+\d{1,3}[- ]?)?\d{8}$/;
+let epostRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+let navnRegex = /^[a-zA-ZæøåÆØÅ' ]{2,30}$/;
 
-function validateForm() {
-    const film = document.getElementById("film").value;
-    const antall = document.getElementById("antall").value;
-    const tallAntall = Number(antall)
-    const fornavn = document.getElementById("fornavn").value;
-    const etternavn = document.getElementById("etternavn").value;
+// Lager en funksjon som skjer når brukeren clicker på kjøp billett
+function kjopBilett() {
+    // Først lagrer all informasjon som brukerenen skriver i input feltene
+    const filmer = document.getElementById("filmer").value;
+    const antallBiletter = document.getElementById("antallBiletter").value;
+    const fornNavn = document.getElementById("fornNavn").value;
+    const etterNavn = document.getElementById("etterNavn").value;
     const telefonNr = document.getElementById("telefonNr").value;
     const epost = document.getElementById("epost").value;
-    const epostRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
-    const navnRegex = /^[a-zA-ZæøåÆØÅ' ]{2,30}$/;
 
+    //Her bruker jeg if-settninger for å skjekke at inputene har riktig verdi
+    if (!fornNavn || !etterNavn || !telefonNr || !epost || !antallBiletter) {
+        alert("Alle felt må fylles ut");
+        return false; // Stopp funksjonen her
+    }
+
+    // Her bruker jeg regex-kode for å validere telefonnr, epost og navn
+    if (!telefonNrRegex.test(telefonNr)) {
+        alert("Vennligst skriv inn gyldig telefonnummer");
+        return false;
+    }
+
+    if (!epostRegex.test(epost)) {
+        alert("Vennligst skriv inn gyldig e-postadresse");
+        return false;
+    }
+    if (!navnRegex.test(fornNavn + etterNavn)) {
+        alert("Skriv inn gyldig navn")
+        return false;
+    }
+
+    // lager objektet med verdiene fra input
     const kinoinfo = {
-        filmer: film,
-        antall: antall,
-        fornavn: fornavn,
-        etternavn: etternavn,
+        filmer: filmer,
+        antall: antallBiletter,
+        fornNavn: fornNavn,
+        etterNavn: etterNavn,
         telefonNr: telefonNr,
         epost: epost
-    };
+    }
+    // pusher objektet til arrayet
+    kinoBilettArray.push(kinoinfo);
 
-    biletterArray.push(kinoinfo);
+    let output = document.getElementById("output");
+    output.innerHTML = ""; // Tømmer output-elementet før vi legger til ny informasjon
 
-    if (!film || !antall || !fornavn || !etternavn || !telefonNr || !epost) {
-        alert("Alle feltene må være utfylt!");
-        return false;
+    // For loop og formatering for å printe ut arrayet
+    for (let i = 0; i < kinoBilettArray.length; i++) {
+        output.innerHTML += "<p><strong>Billett " + (i + 1) + ":</strong><br>" +
+            "Film: " + kinoBilettArray[i].filmer +
+            " Antall: " + kinoBilettArray[i].antallBiletter +
+            " Navn: " + kinoBilettArray[i].fornNavn +
+            " " + kinoBilettArray[i].etterNavn +
+            " Telefonnr: " + kinoBilettArray[i].telefonNr +
+            " Epost: " + kinoBilettArray[i].epost + "</p>";
     }
-    if (!navnRegex.test(fornnavn + etternavn)) {
-        let ut = "Skriv inn gyldig navn!";
-        ut=ut.fontcolor("red");
-        return false;
-    }
-    if (!/^\d{8}$/.test(telefonNr)) {
-        let ut="Telefonnummeret må være 8 siffer langt";
-        ut=ut.fontcolor("red");
-        document.write(ut);
-        return false;
-    }
-    if (!epostRegex.test(epost)) {
-        let ut = "Skriv inn gyldig epost!";
-        ut=ut.fontcolor("red");
-        return false;
-    }
-    if (isNaN(tallAntall)) {
-        let ut = "Du må skrive antallet ved bruk av tall!"
-        ut=ut.fontcolor("red")
-        document.write(ut)
-        return false;
-    }
-
-    for (let i = 0; i<biletterArray.length;i++) {
-        let ut = "Antall: " + biletterArray[i].antall + ", " +
-            "Fornavn: " + biletterArray[i].fornavn + " " + biletterArray[i].etternavn + ", " +
-            "TelefonNr: " + biletterArray[i].telefonNr + ", " +
-            "Epost: " + biletterArray[i].epost;
-        document.getElementById("Informasjon").innerHTML=ut;
-    }
-    console.log("hei")
-
+    // Fjerner verdiene etter at man har kjøpt billett
+    document.getElementById("antallBiletter").value = "";
+    document.getElementById("fornNavn").value = "";
+    document.getElementById("etterNavn").value = "";
+    document.getElementById("telefonNr").value = "";
+    document.getElementById("epost").value = "";
 }
 
-function slettInformasjon() {
-    document.getElementById("Informasjon").textContent = '';
+// Funksjon for slettning av array(Billettene)
+function slettArray() {
+    kinoBilettArray = [];
+    let output = document.getElementById("output");
+    output.innerHTML = "";
 }
+

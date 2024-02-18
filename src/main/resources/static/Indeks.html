@@ -7,49 +7,48 @@
 </head>
 <body>
 <h1>Bestilling av kinobilletter</h1>
+<!-- Liste av filmer -->
+<label for="filmer">Velg film her</label>
+<select name="filmer" id="filmer">
+  <option>Velg her!</option>
+  <option value="Iron Man">Iron Man</option>
+  <option value="The Avengers">The Avengers</option>
+  <option value="Guardians of the Galaxy">Guardians of the Galaxy</option>
+  <option value="Thor: Ragnarok">Thor: Ragnarok</option>
+</select>
 
-<form id="forum" onsubmit="validateForm()">
-  Velg film
-  <select id="film">
-    <option>Velg film her</option>
-    <option value="Iron Man">Iron Man</option>
-    <option value="The Avengers">The Avengers</option>
-    <option value="Guardians of the Galaxy">Guardians of the Galaxy</option>
-    <option value="Thor: Ragnarok">Thor: Ragnarok</option>
-    <option value="Black Panther">Black Panther</option>
-  </select>
-  <br>
-  <br>
-  <label for="antall">Antall</label>
-  <input type="text" id="antall">
-  <br>
-  <br>
-  <br>
+<table>
+  <tr>
+    <td><label for="antallBiletter">Antall</label></td>
+    <td><input type="number" min="1" step="1" id="antallBiletter" style="width: 40px;"></td>
+  </tr>
+</table>
 
-  <label for="fornavn">Fornavn</label>
-  <input type="text" id="fornavn">
-  <br>
+<table>
+  <tr>
+    <td><label for="fornNavn">Fornavn</label></td>
+    <td><input type="text" id="fornNavn" ></td>
+  </tr>
+  <tr>
+    <td><label for="etterNavn">Etternavn</label></td>
+    <td><input type="text" id="etterNavn" ></td>
+  </tr>
+  <tr>
+    <td><label for="telefonNr">TelefonNr</label></td>
+    <td><input type="text" id="telefonNr"></td>
+  </tr>
+  <tr>
+    <td><label for="epost">Epost</label></td>
+    <td><input type="text" id="epost"></td>
+  </tr>
+</table>
 
-  Etternavn
-  <input type="text" id="etternavn">
-  <br>
+<button onclick="kjopBilett()">Kjøp Biletter</button>
 
-  TelefonNr
-  <input type="tel" id="telefonNr">
-  <br>
+<h2>Alle billetter</h2>
+<p id="output"></p>
 
-  Epost
-  <input type="text" id="epost">
-  <br>
-
-  <button onclick="validateForm()">Kjøp billett</button>
-  <br>
-  <h2>Alle Billetter</h2>
-  <br>
-  <button type="button" onclick="slettInformasjon();">Slett alle billettene</button>
-</form>
-
-<div id="Informasjon"></div>
-
+<button onclick="slettArray()">Slett alle billettene</button>
+<script src="oblig1js.js"></script>
 </body>
 </html>
