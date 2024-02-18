@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="Indeks.js"></script>
+</head>
+<body>
+<h1>Bestilling av kinobilletter</h1>
+
+<form id="forum" onsubmit="validateForm()">
+  Velg film
+  <select id="film">
+    <option>Velg film her</option>
+    <option value="Iron Man">Iron Man</option>
+    <option value="The Avengers">The Avengers</option>
+    <option value="Guardians of the Galaxy">Guardians of the Galaxy</option>
+    <option value="Thor: Ragnarok">Thor: Ragnarok</option>
+    <option value="Black Panther">Black Panther</option>
+  </select>
+  <br>
+  <br>
+  <label for="antall">Antall</label>
+  <input type="text" id="antall">
+  <br>
+  <br>
+
+  <label for="fornavn">Fornavn</label>
+  <input type="text" id="fornavn">
+  <br>
+
+  Etternavn
+  <input type="text" id="etternavn">
+  <br>
+
+  TelefonNr
+  <input type="tel" id="telefonNr">
+  <br>
+
+  Epost
+  <input type="text" id="epost">
+  <br>
+
+  <button onclick="validateForm()">Kjøp billett</button>
+  <br>
+  <h2>Alle Billetter</h2>
+  <br>
+  <button type="button" onclick="slettInformasjon();">Slett alle billettene</button>
+</form>
+
+<div id="Informasjon"></div>
+
+</body>
+</html>
